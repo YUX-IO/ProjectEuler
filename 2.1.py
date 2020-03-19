@@ -7,17 +7,18 @@ the first 10 terms will be:
 By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the
 even-valued terms.
 """
-a = 1
-b = 2
-sum = 2
-while True:
-    a = a + b
-    b = a + b
-    if a > 4000000 or b > 4000000:
-        break
-    if a % 2 == 0:
-        sum += a
-    if b % 2 == 0:
-        sum += b
 
-print(sum)
+
+def fib_generator(n):
+    a, b = 1, 1
+    while b <= n:
+        a, b = b, a + b
+        yield a
+
+
+def solution(n):
+    return sum(i for i in fib_generator(n) if not i % 2)
+
+
+if __name__ == '__main__':
+    print(solution(4000000))
