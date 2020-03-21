@@ -48,10 +48,12 @@ data = """75
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
 
-l = list(map(int, data.split()))
-print(l)
-n = data.split('\n')
-print(n)
+l = []
+for k in data.split('\n'):
+    l.append(list(map(int, k.split())))
 
-for x in range(14):
-    for num in n[x]:
+for x in range(len(l) - 2, -1, -1):
+    for k in range(len(l[x])):
+        l[x][k] = max(l[x][k] + l[x + 1][k], l[x][k] + l[x + 1][k + 1])
+
+print(l[0][0])
